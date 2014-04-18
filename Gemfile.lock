@@ -2,7 +2,7 @@ GEM
   remote: https://code.stripe.com/
   remote: https://rubygems.org/
   specs:
-    active_support (3.0.0)
+    activesupport (3.0.0)
       activesupport (= 3.0.0)
     activesupport (3.0.0)
     mime-types (1.25.1)
@@ -18,5 +18,5 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  active_support
+  activesupport
   stripe
