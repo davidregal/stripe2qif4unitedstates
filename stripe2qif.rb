@@ -19,7 +19,7 @@ module Meanbee
       transfers = Stripe::Transfer.all(:count => @count, :date => { :gt => @from_timestamp })
 
       transfers.each do |transfer|
-        date = Time.at(transfer.date).to_datetime.strftime("%F")
+        date = Time.at(transfer.date).to_datetime.strftime("%m/%d/%Y")
         net_amount = transfer.amount.to_f / 100
         fee_amount = transfer.summary.charge_fees.to_f / 100
         currency = transfer.currency.upcase

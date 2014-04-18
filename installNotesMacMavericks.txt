@@ -1,0 +1,257 @@
+On OSX 10.9.2.
+
+Resources clang error received when installing stripe through Stripe's recommended way:
+  1. http://bruteforce.gr/bypassing-clang-error-unknown-argument.html
+  2. http://stackoverflow.com/questions/22703393/clang-error-unknown-argument-mno-fused-madd-wunused-command-line-argumen
+  
+  Stripe's recommended way of install: "sudo gem install --source https://code.stripe.com stripe"
+  
+  
+  After Stripe was installed with their recommended way, bundler asked for it to be installed the normal way "sudo gem install stripe -v '1.9.9'". Maybe Stripe way installed the wrong version.
+  
+  
+For journey is below.
+
+$ ruby stripe2qif.rb 
+/System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/rubygems/core_ext/kernel_require.rb:45:in `require': cannot load such file -- stripe (LoadError)
+	from /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/lib/ruby/2.0.0/rubygems/core_ext/kernel_require.rb:45:in `require'
+	from stripe2qif.rb:7:in `<module:Meanbee>'
+	from stripe2qif.rb:6:in `<main>'
+
+
+
+
+danim@aether:~
+$ sudo gem install --source https://code.stripe.com stripe
+Password:
+Fetching: mime-types-1.25.1.gem (100%)
+Successfully installed mime-types-1.25.1
+Fetching: rest-client-1.6.7.gem (100%)
+Successfully installed rest-client-1.6.7
+Fetching: json-1.8.1.gem (100%)
+Building native extensions.  This could take a while...
+ERROR:  Error installing stripe:
+	ERROR: Failed to build gem native extension.
+
+    /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/bin/ruby extconf.rb
+creating Makefile
+
+make "DESTDIR="
+compiling generator.c
+linking shared-object json/ext/generator.bundle
+clang: error: unknown argument: '-multiply_definedsuppress' [-Wunused-command-line-argument-hard-error-in-future]
+clang: note: this will be a hard error (cannot be downgraded to a warning) in the future
+make: *** [generator.bundle] Error 1
+
+
+Gem files will remain installed in /Library/Ruby/Gems/2.0.0/gems/json-1.8.1 for inspection.
+Results logged to /Library/Ruby/Gems/2.0.0/gems/json-1.8.1/ext/json/ext/generator/gem_make.out
+danim@aether:~
+$ cd ~dave/Documents/wc/
+.DS_Store               init/                   mysqlmonitor/           
+iOSXcodeStarterProject/ ios-testing/            stripe2qif/             
+danim@aether:~
+$ cd ~dave/bin          
+danim@aether:/Users/dave/bin
+$ ll
+-bash: ll: command not found
+danim@aether:/Users/dave/bin
+$ ls
+LICENSE                         links                           techborder_stop.sh
+Quick Search Box.app            ntpdate                         throttle.sh
+README.md                       pdfmeta                         time-awake.sh
+VirtualBox_Uninstall.tool       photorec-testdisk-6.14-WIP      time-business.sh
+android_install_cwm.sh          search_function_file.sh         timedog
+backup_dir.sh                   start-time-tracking.sh          update-clones.sh
+diff-strings.sh                 svn-log-files-functions-dave.sh webserver_start.sh
+general_use_start.sh            svn_diff.sh                     webserver_stop.sh
+general_use_stop.sh             svnx
+get_svn_log_wings.txt           techborder_start.sh
+danim@aether:/Users/dave/bin
+$ cd ../Documents/wc/stripe2qif/
+danim@aether:/Users/dave/Documents/wc/stripe2qif
+$ ll
+-bash: ll: command not found
+danim@aether:/Users/dave/Documents/wc/stripe2qif
+$ ls
+Gemfile       Gemfile.lock  stripe2qif.rb
+danim@aether:/Users/dave/Documents/wc/stripe2qif
+$ sudo bundle install
+Don't run Bundler as root. Bundler can ask for sudo if it is needed, and installing your bundle as root will
+break this application for all non-root users on this machine.
+Fetching source index from https://code.stripe.com/
+Fetching gem metadata from https://rubygems.org/.........
+Fetching additional metadata from https://rubygems.org/.........
+Could not find active_support-3.0.0 in any of the sources
+danim@aether:/Users/dave/Documents/wc/stripe2qif
+$ bundle install
+Fetching source index from https://code.stripe.com/
+Fetching gem metadata from https://rubygems.org/.........
+Fetching additional metadata from https://rubygems.org/.........
+Could not find active_support-3.0.0 in any of the sources
+danim@aether:/Users/dave/Documents/wc/stripe2qif
+$ bundle install
+Fetching source index from https://code.stripe.com/
+Fetching gem metadata from https://rubygems.org/.........
+Fetching additional metadata from https://rubygems.org/.........
+Using mime-types 1.25.1
+
+Errno::EACCES: Permission denied - /Library/Ruby/Gems/2.0.0/build_info/multi_json-1.8.2.info
+An error occurred while installing multi_json (1.8.2), and Bundler cannot continue.
+Make sure that `gem install multi_json -v '1.8.2'` succeeds before bundling.
+danim@aether:/Users/dave/Documents/wc/stripe2qif
+$ gem install multi_json -v '1.8.2'
+Fetching: multi_json-1.8.2.gem (100%)
+ERROR:  While executing gem ... (Gem::FilePermissionError)
+    You don't have write permissions for the /Library/Ruby/Gems/2.0.0 directory.
+danim@aether:/Users/dave/Documents/wc/stripe2qif
+$ sudo gem install multi_json -v '1.8.2'
+Successfully installed multi_json-1.8.2
+Parsing documentation for multi_json-1.8.2
+Installing ri documentation for multi_json-1.8.2
+1 gem installed
+danim@aether:/Users/dave/Documents/wc/stripe2qif
+$ bundle install
+Fetching source index from https://code.stripe.com/
+Fetching gem metadata from https://rubygems.org/.........
+Fetching additional metadata from https://rubygems.org/.........
+Using mime-types 1.25.1
+Using multi_json 1.8.2
+Using rest-client 1.6.7
+
+Errno::EACCES: Permission denied - /Library/Ruby/Gems/2.0.0/build_info/stripe-1.9.9.info
+An error occurred while installing stripe (1.9.9), and Bundler cannot continue.
+Make sure that `gem install stripe -v '1.9.9'` succeeds before bundling.
+danim@aether:/Users/dave/Documents/wc/stripe2qif
+$ sudo gem install --source https://code.stripe.com stripe
+Password:
+Building native extensions.  This could take a while...
+ERROR:  Error installing stripe:
+	ERROR: Failed to build gem native extension.
+
+    /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/bin/ruby extconf.rb
+creating Makefile
+
+make "DESTDIR="
+compiling generator.c
+linking shared-object json/ext/generator.bundle
+clang: error: unknown argument: '-multiply_definedsuppress' [-Wunused-command-line-argument-hard-error-in-future]
+clang: note: this will be a hard error (cannot be downgraded to a warning) in the future
+make: *** [generator.bundle] Error 1
+
+
+Gem files will remain installed in /Library/Ruby/Gems/2.0.0/gems/json-1.8.1 for inspection.
+Results logged to /Library/Ruby/Gems/2.0.0/gems/json-1.8.1/ext/json/ext/generator/gem_make.out
+danim@aether:/Users/dave/Documents/wc/stripe2qif
+$ export CFLAGS=-Qunused-arguments
+danim@aether:/Users/dave/Documents/wc/stripe2qif
+$ export CPPFLAGS=-Qunused-arguments
+danim@aether:/Users/dave/Documents/wc/stripe2qif
+$ sudo gem install --source https://code.stripe.com stripe
+Building native extensions.  This could take a while...
+ERROR:  Error installing stripe:
+	ERROR: Failed to build gem native extension.
+
+    /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/bin/ruby extconf.rb
+creating Makefile
+
+make "DESTDIR="
+compiling generator.c
+linking shared-object json/ext/generator.bundle
+clang: error: unknown argument: '-multiply_definedsuppress' [-Wunused-command-line-argument-hard-error-in-future]
+clang: note: this will be a hard error (cannot be downgraded to a warning) in the future
+make: *** [generator.bundle] Error 1
+
+
+Gem files will remain installed in /Library/Ruby/Gems/2.0.0/gems/json-1.8.1 for inspection.
+Results logged to /Library/Ruby/Gems/2.0.0/gems/json-1.8.1/ext/json/ext/generator/gem_make.out
+danim@aether:/Users/dave/Documents/wc/stripe2qif
+$ sudo ARCHFLAGS=-Wno-error=unused-command-line-argument-hard-error-in-future gem install --source https://code.stripe.com stripe
+Password:
+Building native extensions.  This could take a while...
+Successfully installed json-1.8.1
+Fetching: stripe-1.11.0.gem (100%)
+Successfully installed stripe-1.11.0
+Parsing documentation for json-1.8.1
+unable to convert "\xCF" from ASCII-8BIT to UTF-8 for lib/json/ext/generator.bundle, skipping
+unable to convert "\xCF" from ASCII-8BIT to UTF-8 for lib/json/ext/parser.bundle, skipping
+Installing ri documentation for json-1.8.1
+Parsing documentation for stripe-1.11.0
+Installing ri documentation for stripe-1.11.0
+2 gems installed
+danim@aether:/Users/dave/Documents/wc/stripe2qif
+$ sudo gem install bundler
+Successfully installed bundler-1.6.2
+Parsing documentation for bundler-1.6.2
+1 gem installed
+danim@aether:/Users/dave/Documents/wc/stripe2qif
+$ bundle install
+Fetching source index from https://code.stripe.com/
+Fetching gem metadata from https://rubygems.org/..........
+Fetching additional metadata from https://rubygems.org/.........
+Resolving dependencies...
+Could not find gem 'active_support (>= 0) ruby' in the gems available on this machine.
+danim@aether:/Users/dave/Documents/wc/stripe2qif
+$ bundle install
+Fetching source index from https://code.stripe.com/
+Fetching gem metadata from https://rubygems.org/.........
+Fetching additional metadata from https://rubygems.org/.........
+
+Errno::EACCES: Permission denied - /Library/Ruby/Gems/2.0.0/build_info/activesupport-3.0.0.info
+An error occurred while installing activesupport (3.0.0), and Bundler cannot continue.
+Make sure that `gem install activesupport -v '3.0.0'` succeeds before bundling.
+danim@aether:/Users/dave/Documents/wc/stripe2qif
+$ gem install activesupport -v '3.0.0'
+Fetching: activesupport-3.0.0.gem (100%)
+ERROR:  While executing gem ... (Gem::FilePermissionError)
+    You don't have write permissions for the /Library/Ruby/Gems/2.0.0 directory.
+danim@aether:/Users/dave/Documents/wc/stripe2qif
+$ sudo gem install activesupport -v '3.0.0'
+Successfully installed activesupport-3.0.0
+Parsing documentation for activesupport-3.0.0
+unable to convert "\x80" from ASCII-8BIT to UTF-8 for lib/active_support/values/unicode_tables.dat, skipping
+Installing ri documentation for activesupport-3.0.0
+1 gem installed
+danim@aether:/Users/dave/Documents/wc/stripe2qif
+$ bundle install
+Fetching source index from https://code.stripe.com/
+Fetching gem metadata from https://rubygems.org/.........
+Fetching additional metadata from https://rubygems.org/.........
+Using activesupport 3.0.0
+Using mime-types 1.25.1
+Using multi_json 1.8.2
+Using rest-client 1.6.7
+
+Errno::EACCES: Permission denied - /Library/Ruby/Gems/2.0.0/build_info/stripe-1.9.9.info
+An error occurred while installing stripe (1.9.9), and Bundler cannot continue.
+Make sure that `gem install stripe -v '1.9.9'` succeeds before bundling.
+danim@aether:/Users/dave/Documents/wc/stripe2qif
+$ sudo gem install stripe -v '1.9.9'
+Successfully installed stripe-1.9.9
+Parsing documentation for stripe-1.9.9
+Installing ri documentation for stripe-1.9.9
+1 gem installed
+danim@aether:/Users/dave/Documents/wc/stripe2qif
+$ bundle install
+Using activesupport 3.0.0
+Using mime-types 1.25.1
+Using multi_json 1.8.2
+Using rest-client 1.6.7
+Using stripe 1.9.9
+Using bundler 1.6.2
+There was an error while trying to write to Gemfile.lock. It is likely that 
+you need to allow write permissions for the file at path: 
+/Users/dave/Documents/wc/stripe2qif/Gemfile.lock
+danim@aether:/Users/dave/Documents/wc/stripe2qif
+$ vi Gemfile
+danim@aether:/Users/dave/Documents/wc/stripe2qif
+$ bundle install
+Using activesupport 3.0.0
+Using mime-types 1.25.1
+Using multi_json 1.8.2
+Using rest-client 1.6.7
+Using stripe 1.9.9
+Using bundler 1.6.2
+Your bundle is complete!
+Use `bundle show [gemname]` to see where a bundled gem is installed.
+danim@aether:/Users/dave/Documents/wc/stripe2qif
