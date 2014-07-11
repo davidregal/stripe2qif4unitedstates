@@ -22,9 +22,12 @@ module Meanbee
         date = Time.at(transfer.date).to_datetime.strftime("%m/%d/%Y")
         net_amount = transfer.amount.to_f / 100
         fee_amount = transfer.summary.charge_fees.to_f / 100
+        gross_amount = net_amount + fee_amount
         currency = transfer.currency.upcase
 
-        @qif.add date, "Transfer on #{date} (Fee: #{fee_amount}#{currency})", net_amount
+        @qif.add date, "Gross amount. Transfer on #{date} (Fee: #{fee_amount}#{currency})", gross_amount
+        @qif.add date, "Net amount. Transfer on #{date} (Fee: #{fee_amount}#{currency})", -net_amount
+        @qif.add date, "Fee for transfer on #{date} (Net amount: #{net_amount}#{currency})", -fee_amount
       end
     end
 
