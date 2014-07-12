@@ -26,6 +26,7 @@ module Meanbee
         currency = transfer.currency.upcase
 
         @qif.add date, "Gross amount. Transfer on #{date} (Fee: #{fee_amount}#{currency})", gross_amount
+        @qif.add date, "Net amount. Transfer on #{date} (Fee: #{fee_amount}#{currency})", -net_amount
         @qif.add date, "Fee for transfer on #{date} (Net amount: #{net_amount}#{currency})", -fee_amount
       end
     end
