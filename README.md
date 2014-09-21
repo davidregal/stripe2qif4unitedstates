@@ -1,9 +1,9 @@
 stripe2qif4unitedstates
 =======================
 
-Pulls data through Stripe API to get the list of transfers and exports in QIF format.
+Pulls data through Stripe API to get the list of transfers and exports in QIF format file.
 
-QIF format is can be uploaded to QuickBooks Online or, my purpose, Xero cloud accounting software.
+QIF file can be uploaded to QuickBooks Online or, my purpose, Xero cloud accounting software.
 
 I need to get the card processing feeds into Xero. I created a separate account called 'Stripe' and import statments every quarter. Make sure you keep track of your last import to avoid duplicate transactions.
 
