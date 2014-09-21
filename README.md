@@ -22,7 +22,7 @@ This API key will got in the parameter for argument "--api-key".
 
 ## Create the QIF export.
 
-`ruby stripe2qif.rb --api-key your_stripe_api_key_here_this_is_not_mylivekey --from 01/04/2014 > ~/tmp/stripe-transactions-2014-07-11-with-net.txt`
+`ruby stripe2qif.rb --api-key your_stripe_api_key_here_this_is_not_mylivekey --from 01/04/2014 > ~/tmp/stripe-transactions-2014-07-11-with-net.qif`
 
 ## If using Xero, switch to your test account in Xero.
 
