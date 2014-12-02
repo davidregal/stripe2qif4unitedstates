@@ -6,9 +6,9 @@ require 'date'
 module Meanbee
   require 'stripe'
   
-  class StripeQif
+  class StripeCsv
     def initialize(api_key, from_date, count)
-      @qif = Qif.new
+      @csv = Csv.new
       @from_timestamp = DateTime.parse(from_date).strftime('%s')
       @count = count
 
@@ -29,18 +29,18 @@ module Meanbee
         # obj_balance_transaction = Stripe::BalanceTransaction.retrieve(transfer.balance_transaction)
         # For example, obj_balance_transaction.description is the same as transfer.description. I need to get to the charges level in a reliable way.
         desc_prefix = transfer.description + " " + transfer.balance_transaction
-        @qif.add date, desc_prefix + " Gross amount", gross_amount
-        @qif.add date, desc_prefix + " Net amount", -net_amount
-        @qif.add date, desc_prefix + " Fee", -fee_amount
+        @csv.add date, desc_prefix + " Gross amount", gross_amount
+        @csv.add date, desc_prefix + " Net amount", -net_amount
+        @csv.add date, desc_prefix + " Fee", -fee_amount
       end
     end
 
     def print
-      @qif.print
+      @csv.print
     end
   end
   
-  class Qif
+  class Csv
     def initialize()
       @items = []
     end
@@ -73,7 +73,7 @@ options[:from] = '01/01/1900'
 options[:count] = 100
 
 optparse = OptionParser.new do |opts|
-    opts.banner = "Usage: stripe2qif.rb --api-key STRIPE_API_KEY"
+    opts.banner = "Usage: stripe2csv.rb --api-key STRIPE_API_KEY"
 
     opts.on('--api-key STRIPE_API_KEY', 'Stripe API key, required.') do |f|
         options[:api_key] = f
@@ -103,7 +103,7 @@ rescue
     exit 1
 end
 
-qif = Meanbee::StripeQif.new(options[:api_key], options[:from], options[:count])
-qif.process
+csv = Meanbee::StripeCsv.new(options[:api_key], options[:from], options[:count])
+csv.process
 
-puts qif.print
+puts csv.print
