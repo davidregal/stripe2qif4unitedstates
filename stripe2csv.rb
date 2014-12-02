@@ -25,9 +25,13 @@ module Meanbee
         gross_amount = net_amount + fee_amount
         currency = transfer.currency.upcase
 
-        desc_prefix = transfer.balance_transaction + " " + transfer.description
-        @qif.add date, "Gross amount " + balance_transaction, gross_amount
-        @qif.add date, "Fee " balance_transaction, -fee_amount
+        # balance_transaction object is retrieved but no extra info. I want to get a list of the charges that were included in this transfer.
+        # obj_balance_transaction = Stripe::BalanceTransaction.retrieve(transfer.balance_transaction)
+        # For example, obj_balance_transaction.description is the same as transfer.description. I need to get to the charges level in a reliable way.
+        desc_prefix = transfer.description + " " + transfer.balance_transaction
+        @qif.add date, desc_prefix + " Gross amount", gross_amount
+        @qif.add date, desc_prefix + " Net amount", -net_amount
+        @qif.add date, desc_prefix + " Fee", -fee_amount
       end
     end
 
