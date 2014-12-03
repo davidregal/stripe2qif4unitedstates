@@ -28,7 +28,7 @@ module Meanbee
         # balance_transaction object is retrieved but no extra info. I want to get a list of the charges that were included in this transfer.
         # obj_balance_transaction = Stripe::BalanceTransaction.retrieve(transfer.balance_transaction)
         # For example, obj_balance_transaction.description is the same as transfer.description. I need to get to the charges level in a reliable way.
-        desc_prefix = transfer.description + " " + transfer.balance_transaction
+        desc_prefix = "stripe " + transfer.balance_transaction
         @csv.add date, desc_prefix + " Gross amount", gross_amount
         @csv.add date, desc_prefix + " Net amount", -net_amount
         @csv.add date, desc_prefix + " Fee", -fee_amount
@@ -57,7 +57,7 @@ module Meanbee
       lines = []
       
       @items.each do |item|
-        lines << item[:date] + "," + item[:desc] + "," + "%.3f" % item[:amount]
+        lines << item[:date] + "," + item[:desc] + "," + "%.2f" % item[:amount]
       end
       
       lines << "\n" # Empty line
